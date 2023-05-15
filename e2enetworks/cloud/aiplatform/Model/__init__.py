@@ -1,10 +1,10 @@
 class Model:
-    def __init__(self, name=None, type=None, bucket_name=None, model_type=None, init=None):
+    def __init__(self, name=None, type=None, bucket_name=None, model_type=None, credentials=None):
         self.name = name
         self.type = type
         self.bucket_name = bucket_name
         self.model_type = model_type
-        self.credentials = init
+        self.credentials = credentials
 
     @classmethod
     def create(cls):

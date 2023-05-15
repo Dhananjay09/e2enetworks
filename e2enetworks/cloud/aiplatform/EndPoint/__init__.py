@@ -1,9 +1,10 @@
 class EndPoint:
-    def __init__(self, model=None, sku_id=None, storage_url=None, replica=None):
+    def __init__(self, model=None, sku_id=None, storage_url=None, replica=None, credentials=None):
         self.model = model
         self.sku_id = sku_id,
         self.storage_url = storage_url,
         self.replica = replica
+        self.credentials = credentials
 
     @classmethod
     def create(cls):
