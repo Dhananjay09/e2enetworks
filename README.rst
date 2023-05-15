@@ -1,4 +1,4 @@
-certbot-dns-ispconfig
+e2enetworks
 =====================
 
 ISPConfig_ DNS Authenticator plugin for Certbot
@@ -24,7 +24,7 @@ Installation
 
 ::
 
-    pip install certbot-dns-ispconfig
+    pip install e2enetworks
 
 
 Named Arguments
@@ -34,17 +34,17 @@ To start using DNS authentication for ispconfig, pass the following arguments on
 certbot's command line:
 
 ============================================================= ==============================================
-``--authenticator certbot-dns-ispconfig:dns-ispconfig``          select the authenticator plugin (Required)
+``--authenticator e2enetworks:dns-ispconfig``          select the authenticator plugin (Required)
 
-``--certbot-dns-ispconfig:dns-ispconfig-credentials``         ispconfig Remote User credentials
+``--e2enetworks:dns-ispconfig-credentials``         ispconfig Remote User credentials
                                                               INI file. (Required)
 
-``--certbot-dns-ispconfig:dns-ispconfig-propagation-seconds`` | waiting time for DNS to propagate before asking
+``--e2enetworks:dns-ispconfig-propagation-seconds`` | waiting time for DNS to propagate before asking
                                                               | the ACME server to verify the DNS record.
                                                               | (Default: 120, Recommended: >= 600)
 ============================================================= ==============================================
 
-(Note that the verbose and seemingly redundant ``certbot-dns-ispconfig:`` prefix
+(Note that the verbose and seemingly redundant ``e2enetworks:`` prefix
 is currently imposed by certbot for external plugins.)
 
 
@@ -60,7 +60,7 @@ An example ``credentials.ini`` file:
    certbot_dns_ispconfig:dns_ispconfig_endpoint = https://you.ipsconfig.host:8080/remote/json.php
 
 The path to this file can be provided interactively or using the
-``--certbot-dns-ispconfig:dns-ispconfig-credentials`` command-line argument. Certbot
+``--e2enetworks:dns-ispconfig-credentials`` command-line argument. Certbot
 records the path to this file for use during renewal, but does not store the
 file's contents.
 
@@ -88,9 +88,9 @@ To acquire a single certificate for both ``example.com`` and
 .. code-block:: bash
 
    certbot certonly \
-     --authenticator certbot-dns-ispconfig:dns-ispconfig \
-     --certbot-dns-ispconfig:dns-ispconfig-credentials /etc/letsencrypt/.secrets/domain.tld.ini \
-     --certbot-dns-ispconfig:dns-ispconfig-propagation-seconds 900 \
+     --authenticator e2enetworks:dns-ispconfig \
+     --e2enetworks:dns-ispconfig-credentials /etc/letsencrypt/.secrets/domain.tld.ini \
+     --e2enetworks:dns-ispconfig-propagation-seconds 900 \
      --server https://acme-v02.api.letsencrypt.org/directory \
      --agree-tos \
      --rsa-key-size 4096 \
@@ -101,13 +101,13 @@ To acquire a single certificate for both ``example.com`` and
 Docker
 ------
 
-In order to create a docker container with a certbot-dns-ispconfig installation,
+In order to create a docker container with a e2enetworks installation,
 create an empty directory with the following ``Dockerfile``:
 
 .. code-block:: docker
 
     FROM certbot/certbot
-    RUN pip install certbot-dns-ispconfig
+    RUN pip install e2enetworks
 
 Proceed to build the image::
 
@@ -120,9 +120,9 @@ Once that's finished, the application can be run as follows::
        -v /etc/letsencrypt:/etc/letsencrypt \
        --cap-drop=all \
        certbot/dns-ispconfig certonly \
-       --authenticator certbot-dns-ispconfig:dns-ispconfig \
-       --certbot-dns-ispconfig:dns-ispconfig-propagation-seconds 900 \
-       --certbot-dns-ispconfig:dns-ispconfig-credentials \
+       --authenticator e2enetworks:dns-ispconfig \
+       --e2enetworks:dns-ispconfig-propagation-seconds 900 \
+       --e2enetworks:dns-ispconfig-credentials \
            /etc/letsencrypt/.secrets/domain.tld.ini \
        --no-self-upgrade \
        --keep-until-expiring --non-interactive --expand \
