@@ -1,11 +1,11 @@
 import requests
-from e2enetworks.constants import LIST_BUCKETS_URL
+from e2enetworks.constants import BASE_GPU_URL
 
 
 class Dataset:
     def __init__(self, team_id, project_id, credentials):
         self.team_id = team_id
-        self.project = project_id
+        self.project_id = project_id
         self.credentials = credentials
 
     def create(self, bucket_name, bucket_type=None):
@@ -15,7 +15,7 @@ class Dataset:
         pass
 
     def list(self):
-        url = f"{LIST_BUCKETS_URL}teams/{self.team_id}/projects/{self.project}/datasets/" \
+        url = f"{BASE_GPU_URL}teams/{self.team_id}/projects/{self.project_id}/datasets/" \
               f"eos-bucket-selection-list/?apikey={self.credentials.access_key}"
         payload = ""
         headers = {
