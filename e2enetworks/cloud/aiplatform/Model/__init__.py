@@ -35,7 +35,7 @@ class Model:
             'Authorization': f'Bearer {self.credentials.api_token}'
         }
         response = requests.request("GET", url, headers=headers, data=payload)
-        print(response.json()["data"])
+        print(response.json())
 
     def list(self):
         url = f"{BASE_GPU_URL}teams/{self.team_id}/projects/{self.project_id}/model/" \
@@ -45,7 +45,7 @@ class Model:
             'Authorization': f'Bearer {self.credentials.api_token}'
         }
         response = requests.request("GET", url, headers=headers, data=payload)
-        print(response.json()["data"])
+        print(response.json())
 
     def delete(self, model_id):
         url = f"{BASE_GPU_URL}teams/{self.team_id}/projects/{self.project_id}/model/{model_id}" \
@@ -55,4 +55,4 @@ class Model:
             'Authorization': f'Bearer {self.credentials.api_token}'
         }
         response = requests.request("DELETE", url, headers=headers, data=payload)
-        print(response.json()["data"])
+        print(response.json())
