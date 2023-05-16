@@ -1,23 +1,17 @@
 class Model:
-    def __init__(self, name=None, type=None, bucket_name=None, model_type=None, credentials=None):
-        self.name = name
-        self.type = type
-        self.bucket_name = bucket_name
-        self.model_type = model_type
+    def __init__(self, team, project, credentials=None):
+        self.team = team
+        self.project = project
         self.credentials = credentials
 
-    @classmethod
-    def create(cls):
+    def create(self, name=None, bucket_type=None, bucket_name=None, model_type=None):
         pass
 
-    @classmethod
-    def get(cls, model_name):
+    def get(self, model_id):
         pass
 
-    @classmethod
-    def list(cls):
+    def list(self):
         pass
 
-    @classmethod
-    def delete(cls):
+    def delete(self, model_id):
         pass

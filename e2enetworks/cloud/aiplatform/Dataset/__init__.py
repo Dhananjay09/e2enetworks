@@ -1,21 +1,15 @@
 class Dataset:
-    def __init__(self, bucket_name=None, type=None, credentials=None):
-        self.bucket_name = bucket_name
-        self.type = type
+    def __init__(self, credentials=None):
         self.credentials = credentials
 
-    @classmethod
-    def create(cls):
+    def create(self, bucket_name, bucket_type=None):
         pass
 
-    @classmethod
-    def get(cls, model_name):
+    def get(self, bucket_name):
         pass
 
-    @classmethod
-    def list(cls):
+    def list(self):
         pass
 
-    @classmethod
-    def delete(cls):
+    def delete(self, bucket_name):
         pass

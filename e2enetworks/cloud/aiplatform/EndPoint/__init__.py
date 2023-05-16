@@ -1,23 +1,15 @@
 class EndPoint:
-    def __init__(self, model=None, sku_id=None, storage_url=None, replica=None, credentials=None):
+    def __init__(self, model=None):
         self.model = model
-        self.sku_id = sku_id,
-        self.storage_url = storage_url,
-        self.replica = replica
-        self.credentials = credentials
 
-    @classmethod
-    def create(cls):
+    def create(self, sku_id=None, storage_url=None, replica=None,):
         pass
 
-    @classmethod
-    def get(cls, model_name):
+    def get(self, endpoint_id):
         pass
 
-    @classmethod
-    def list(cls):
+    def list(self):
         pass
 
-    @classmethod
-    def delete(cls):
+    def delete(self, endpoint_id):
         pass
