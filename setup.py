@@ -2,9 +2,9 @@ from setuptools import setup
 from setuptools import find_packages
 from os import path
 
-version = "0.0.12"
+version = "0.0.13"
 install_requires = [
-
+    "requests",
 ]
 # read the contents of your README file
 
