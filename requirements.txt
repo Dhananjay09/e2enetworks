@@ -1,2 +1,5 @@
 setuptools==67.7.2
 requests~=2.30.0
+
+e2enetworks~=0.0.10
+config~=0.5.1
