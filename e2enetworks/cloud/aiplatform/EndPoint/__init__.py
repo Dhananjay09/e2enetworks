@@ -22,7 +22,7 @@ class EndPoint:
         }
         response = requests.request("POST", url, headers=headers, data=payload)
 
-        print(response.json())
+        print(json.dumps(response.json(), indent=4))
 
     def get(self, model_id, endpoint_id):
         url = f"{BASE_GPU_URL}teams/{self.model.team_id}/projects/{self.model.project_id}/model/{model_id}/" \
@@ -32,7 +32,7 @@ class EndPoint:
             'Authorization': f'Bearer {config.api_token}'
         }
         response = requests.request("GET", url, headers=headers, data=payload)
-        print(response.json())
+        print(json.dumps(response.json(), indent=4))
 
     def list(self):
         url = f"{BASE_GPU_URL}teams/{self.model.team_id}/projects/{self.model.project_id}/model/inferences-list" \
@@ -42,7 +42,7 @@ class EndPoint:
             'Authorization': f'Bearer {config.api_token}'
         }
         response = requests.request("GET", url, headers=headers, data=payload)
-        print(response.json())
+        print(json.dumps(response.json(), indent=4))
 
     def delete(self, model_id, endpoint_id):
         url = f"{BASE_GPU_URL}teams/{self.model.team_id}/projects/{self.model.project_id}/model/{model_id}/" \
@@ -52,4 +52,4 @@ class EndPoint:
             'Authorization': f'Bearer {config.api_token}'
         }
         response = requests.request("DELETE", url, headers=headers, data=payload)
-        print(response.json())
+        print(json.dumps(response.json(), indent=4))

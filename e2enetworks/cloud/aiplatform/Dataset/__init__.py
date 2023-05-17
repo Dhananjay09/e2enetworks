@@ -1,3 +1,4 @@
+import json
 import requests
 from e2enetworks.constants import BASE_GPU_URL
 from e2enetworks.cloud.aiplatform import config
@@ -23,7 +24,7 @@ class Dataset:
         }
         response = requests.request("GET", url, headers=headers, data=payload)
 
-        print(response.json()['data'])
+        print(json.dumps(response.json(), indent=4))
 
     def delete(self, bucket_name):
         pass
