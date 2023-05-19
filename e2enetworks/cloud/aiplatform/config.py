@@ -1,2 +1,2 @@
-access_key = None
-api_token = None
+apikey = None
+access_token = None

@@ -17,10 +17,10 @@ class Dataset:
 
     def list(self):
         url = f"{BASE_GPU_URL}teams/{self.team_id}/projects/{self.project_id}/datasets/" \
-              f"eos-bucket-selection-list/?apikey={config.access_key}"
+              f"eos-bucket-selection-list/?apikey={config.apikey}"
         payload = ""
         headers = {
-            'Authorization': f'Bearer {config.api_token}'
+            'Authorization': f'Bearer {config.access_token}'
         }
         response = requests.request("GET", url, headers=headers, data=payload)
 

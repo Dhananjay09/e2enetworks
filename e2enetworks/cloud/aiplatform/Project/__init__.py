@@ -12,39 +12,39 @@ class Projects:
         payload = json.dumps({
             "project_name": project_name,
         })
-        url = f"{BASE_GPU_URL}teams/{self.team_id}/projects/?apikey={config.access_key}"
+        url = f"{BASE_GPU_URL}teams/{self.team_id}/projects/?apikey={config.apikey}"
 
         headers = {
             'Content-Type': 'application/json',
-            'Authorization': f'Bearer {config.api_token}'
+            'Authorization': f'Bearer {config.access_token}'
         }
         response = requests.request("POST", url, headers=headers, data=payload)
 
         print(json.dumps(response.json(), indent=4))
 
     def get(self, project_id):
-        url = f"{BASE_GPU_URL}teams/{self.team_id}/projects/{project_id}/?apikey={config.access_key}"
+        url = f"{BASE_GPU_URL}teams/{self.team_id}/projects/{project_id}/?apikey={config.apikey}"
         payload = ""
         headers = {
-            'Authorization': f'Bearer {config.api_token}'
+            'Authorization': f'Bearer {config.access_token}'
         }
         response = requests.request("GET", url, headers=headers, data=payload)
         print(json.dumps(response.json(), indent=4))
 
     def list(self):
-        url = f"{BASE_GPU_URL}teams/{self.team_id}/projects/?apikey={config.access_key}"
+        url = f"{BASE_GPU_URL}teams/{self.team_id}/projects/?apikey={config.apikey}"
         payload = ""
         headers = {
-            'Authorization': f'Bearer {config.api_token}'
+            'Authorization': f'Bearer {config.access_token}'
         }
         response = requests.request("GET", url, headers=headers, data=payload)
         print(json.dumps(response.json(), indent=4))
 
     def delete(self, project_id):
-        url = f"{BASE_GPU_URL}teams/{self.team_id}/projects/{project_id}/?apikey={config.access_key}"
+        url = f"{BASE_GPU_URL}teams/{self.team_id}/projects/{project_id}/?apikey={config.apikey}"
         payload = ""
         headers = {
-            'Authorization': f'Bearer {config.api_token}'
+            'Authorization': f'Bearer {config.access_token}'
         }
         response = requests.request("DELETE", url, headers=headers, data=payload)
         print(json.dumps(response.json(), indent=4))

@@ -9,39 +9,39 @@ class Teams:
         payload = json.dumps({
             "team_name": team_name,
         })
-        url = f"{BASE_GPU_URL}teams/?apikey={config.access_key}"
+        url = f"{BASE_GPU_URL}teams/?apikey={config.apikey}"
 
         headers = {
             'Content-Type': 'application/json',
-            'Authorization': f'Bearer {config.api_token}'
+            'Authorization': f'Bearer {config.access_token}'
         }
         response = requests.request("POST", url, headers=headers, data=payload)
 
         print(json.dumps(response.json(), indent=4))
 
     def get(self, team_id):
-        url = f"{BASE_GPU_URL}teams/{team_id}/?apikey={config.access_key}"
+        url = f"{BASE_GPU_URL}teams/{team_id}/?apikey={config.apikey}"
         payload = ""
         headers = {
-            'Authorization': f'Bearer {config.api_token}'
+            'Authorization': f'Bearer {config.access_token}'
         }
         response = requests.request("GET", url, headers=headers, data=payload)
         print(json.dumps(response.json(), indent=4))
 
     def list(self):
-        url = f"{BASE_GPU_URL}teams/?apikey={config.access_key}"
+        url = f"{BASE_GPU_URL}teams/?apikey={config.apikey}"
         payload = ""
         headers = {
-            'Authorization': f'Bearer {config.api_token}'
+            'Authorization': f'Bearer {config.access_token}'
         }
         response = requests.request("GET", url, headers=headers, data=payload)
         print(json.dumps(response.json(), indent=4))
 
     def delete(self, team_id):
-        url = f"{BASE_GPU_URL}teams/{team_id}/?apikey={config.access_key}"
+        url = f"{BASE_GPU_URL}teams/{team_id}/?apikey={config.apikey}"
         payload = ""
         headers = {
-            'Authorization': f'Bearer {config.api_token}'
+            'Authorization': f'Bearer {config.access_token}'
         }
         response = requests.request("DELETE", url, headers=headers, data=payload)
         print(json.dumps(response.json(), indent=4))

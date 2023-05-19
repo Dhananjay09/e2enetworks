@@ -17,11 +17,11 @@ class Model:
             "model_type": model_type
         })
         url = f"{BASE_GPU_URL}teams/{self.team_id}/projects/{self.project_id}/model/" \
-              f"?apikey={config.access_key}"
+              f"?apikey={config.apikey}"
 
         headers = {
             'Content-Type': 'application/json',
-            'Authorization': f'Bearer {config.api_token}'
+            'Authorization': f'Bearer {config.access_token}'
         }
         response = requests.request("POST", url, headers=headers, data=payload)
 
@@ -29,30 +29,30 @@ class Model:
 
     def get(self, model_id):
         url = f"{BASE_GPU_URL}teams/{self.team_id}/projects/{self.project_id}/model/{model_id}" \
-              f"?apikey={config.access_key}"
+              f"?apikey={config.apikey}"
         payload = ""
         headers = {
-            'Authorization': f'Bearer {config.api_token}'
+            'Authorization': f'Bearer {config.access_token}'
         }
         response = requests.request("GET", url, headers=headers, data=payload)
         print(json.dumps(response.json(), indent=4))
 
     def list(self):
         url = f"{BASE_GPU_URL}teams/{self.team_id}/projects/{self.project_id}/model/" \
-              f"?apikey={config.access_key}"
+              f"?apikey={config.apikey}"
         payload = ""
         headers = {
-            'Authorization': f'Bearer {config.api_token}'
+            'Authorization': f'Bearer {config.access_token}'
         }
         response = requests.request("GET", url, headers=headers, data=payload)
         print(json.dumps(response.json(), indent=4))
 
     def delete(self, model_id):
         url = f"{BASE_GPU_URL}teams/{self.team_id}/projects/{self.project_id}/model/{model_id}/" \
-              f"?apikey={config.access_key}"
+              f"?apikey={config.apikey}"
         payload = ""
         headers = {
-            'Authorization': f'Bearer {config.api_token}'
+            'Authorization': f'Bearer {config.access_token}'
         }
         response = requests.request("DELETE", url, headers=headers, data=payload)
         print(json.dumps(response.json(), indent=4))
