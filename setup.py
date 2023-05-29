@@ -2,7 +2,7 @@ from setuptools import setup
 from setuptools import find_packages
 from os import path
 
-version = "0.0.16"
+version = "0.0.17"
 install_requires = [
     "requests",
 ]
