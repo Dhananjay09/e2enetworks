@@ -62,3 +62,13 @@ class EndPoints:
         response = requests.request("DELETE", url, headers=headers, data=payload)
         print(json.dumps(response.json(), indent=INDENTATION))
         #return response.json()
+
+    def logs(self, endpoint_id):
+        url = f"{BASE_GPU_URL}teams/{self.team_id}/projects/{self.project_id}/serving/inference/{endpoint_id}/logs?" \
+              f"apikey={config.apikey}"
+        payload = ""
+        headers = {
+            'Authorization': f'Bearer {config.auth_token}'
+        }
+        response = requests.request("GET", url, headers=headers, data=payload)
+        print(json.dumps(response.json(), indent=INDENTATION))
