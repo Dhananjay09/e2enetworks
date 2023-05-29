@@ -5,16 +5,19 @@ from e2enetworks.cloud.aiplatform import config
 
 
 class EndPoint:
-    def __init__(self, model):
-        self.model = model
+    def __init__(self, team_id, project_id):
+        self.team_id = team_id
+        self.project_id = project_id
 
-    def create(self, model_id, sku_id, storage_url, replica):
+    def create(self, name, sku_id, prefix, replica, model_id):
         payload = json.dumps({
+            "name": name,
             "sku_id": sku_id,
-            "storage_url": storage_url,
-            "replica": replica
+            "prefix": prefix,
+            "replica": replica,
+            "model_id": model_id
         })
-        url = f"{BASE_GPU_URL}teams/{self.model.team_id}/projects/{self.model.project_id}/model/{model_id}/inference/" \
+        url = f"{BASE_GPU_URL}teams/{self.team_id}/projects/{self.project_id}/serving/inference/" \
               f"?apikey={config.apikey}"
         headers = {
             'Content-Type': 'application/json',
@@ -24,9 +27,9 @@ class EndPoint:
 
         print(json.dumps(response.json(), indent=4))
 
-    def get(self, model_id, endpoint_id):
-        url = f"{BASE_GPU_URL}teams/{self.model.team_id}/projects/{self.model.project_id}/model/{model_id}/" \
-              f"inference/{endpoint_id}/?apikey={config.apikey}"
+    def get(self, endpoint_id):
+        url = f"{BASE_GPU_URL}teams/{self.team_id}/projects/{self.project_id}/serving/inference/{endpoint_id}/?" \
+              f"apikey={config.apikey}"
         payload = ""
         headers = {
             'Authorization': f'Bearer {config.access_token}'
@@ -35,7 +38,7 @@ class EndPoint:
         print(json.dumps(response.json(), indent=4))
 
     def list(self):
-        url = f"{BASE_GPU_URL}teams/{self.model.team_id}/projects/{self.model.project_id}/model/inferences-list" \
+        url = f"{BASE_GPU_URL}teams/{self.team_id}/projects/{self.project_id}/serving/inference/" \
               f"?apikey={config.apikey}"
         payload = ""
         headers = {
@@ -44,9 +47,9 @@ class EndPoint:
         response = requests.request("GET", url, headers=headers, data=payload)
         print(json.dumps(response.json(), indent=4))
 
-    def delete(self, model_id, endpoint_id):
-        url = f"{BASE_GPU_URL}teams/{self.model.team_id}/projects/{self.model.project_id}/model/{model_id}/" \
-              f"inference/{endpoint_id}/?apikey={config.apikey}"
+    def delete(self, endpoint_id):
+        url = f"{BASE_GPU_URL}teams/{self.team_id}/projects/{self.project_id}/serving/inference/{endpoint_id}/" \
+              f"?apikey={config.apikey}"
         payload = ""
         headers = {
             'Authorization': f'Bearer {config.access_token}'
