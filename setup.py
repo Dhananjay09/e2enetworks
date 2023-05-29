@@ -2,9 +2,10 @@ from setuptools import setup
 from setuptools import find_packages
 from os import path
 
-version = "0.0.17"
+version = "0.0.18"
 install_requires = [
     "requests",
+    "urllib3==1.26.6",
 ]
 # read the contents of your README file
 
