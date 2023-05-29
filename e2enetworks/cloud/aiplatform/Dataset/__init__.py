@@ -1,7 +1,9 @@
 import json
+
 import requests
-from e2enetworks.constants import BASE_GPU_URL
+
 from e2enetworks.cloud.aiplatform import config
+from e2enetworks.constants import BASE_GPU_URL, INDENTATION
 
 
 class Datasets:
@@ -20,11 +22,12 @@ class Datasets:
               f"eos-bucket-selection-list/?apikey={config.apikey}"
         payload = ""
         headers = {
-            'Authorization': f'Bearer {config.access_token}'
+            'Authorization': f'Bearer {config.auth_token}'
         }
         response = requests.request("GET", url, headers=headers, data=payload)
 
-        print(json.dumps(response.json(), indent=4))
+        print(json.dumps(response.json(), indent=INDENTATION))
+        #return response.json()
 
     def delete(self, bucket_name):
         pass
