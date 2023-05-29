@@ -4,7 +4,7 @@ from e2enetworks.constants import BASE_GPU_URL
 from e2enetworks.cloud.aiplatform import config
 
 
-class EndPoint:
+class EndPoints:
     def __init__(self, team_id, project_id):
         self.team_id = team_id
         self.project_id = project_id
