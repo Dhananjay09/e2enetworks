@@ -1,3 +1,4 @@
+from e2enetworks.cloud.aiplatform.Notebooks import Notebooks
 from e2enetworks.cloud.aiplatform.Dataset import Datasets
 from e2enetworks.cloud.aiplatform.EndPoint import EndPoints
 from e2enetworks.cloud.aiplatform.init import init
