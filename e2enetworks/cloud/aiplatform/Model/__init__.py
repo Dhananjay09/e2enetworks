@@ -20,6 +20,7 @@ class Models:
         if type(self.project_id) != int:
             print(f"Project Id -{self.project_id} Should be Integer")
             return False, f"Project Id -{self.project_id} should be Integer"
+        return True, "Success"
 
     def clear_values(self):
         self.team_id = None
@@ -60,7 +61,8 @@ class Models:
             return response
 
         if type(model_id) != int:
-            return f"Model ID - {model_id} Should be Integer"
+            print(f"Model ID - {model_id} Should be Integer")
+            return
 
         url = f"{BASE_GPU_URL}teams/{self.team_id}/projects/{self.project_id}/serving/model/{model_id}" \
               f"?apikey={config.apikey}"
@@ -109,3 +111,27 @@ class Models:
         response = requests.request("DELETE", url, headers=headers, data=payload)
         print(json.dumps(response.json(), indent=INDENTATION))
         # return response.json()
+
+    @staticmethod
+    def help():
+        print("Models Class Help")
+        print("=================")
+        print("This class provides functionalities to interact with models.")
+        print("Available methods:")
+        print(
+            "1. __init__(team_id, project_id): Initializes a Models instance with the specified team and project IDs.")
+        print("2. create(name, bucket_type, bucket_name, model_type): Creates a new model with the provided details.")
+        print("3. get(model_id): Retrieves information about a specific model using its ID.")
+        print("4. list(): Lists all models associated with the team and project.")
+        print("5. delete(model_id): Deletes a model with the given ID.")
+        print("6. clear_values(): Resets the team and project IDs to None.")
+        print("7. validate(): Checks if the team and project IDs are of integer type.")
+        print("8. help(): Displays this help message.")
+
+        # Example usages
+        print("\nExample usages:")
+        print("models = Models(123, 456)")
+        print("models.create('Model Name', 'Bucket Type', 'Bucket Name', 'Model Type')")
+        print("models.get(789)")
+        print("models.list()")
+        print("models.delete(789)")

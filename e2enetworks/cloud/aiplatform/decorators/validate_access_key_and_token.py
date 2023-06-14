@@ -7,5 +7,5 @@ def validate_access_key_and_token(func):
             return f"APIKEY = {config.apikey} is not Valid"
         if not config.auth_token:
             return f"AUTH-TOKEN = {config.auth_token} is not Valid"
-        func(*args, **kwargs)
+        return func(*args, **kwargs)
     return inner1

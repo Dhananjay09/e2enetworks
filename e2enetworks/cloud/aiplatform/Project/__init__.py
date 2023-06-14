@@ -16,6 +16,7 @@ class Projects:
         if type(self.team_id) != int:
             print(f"Team Id -{self.team_id} Should be Integer")
             return False, f"Team Id -{self.team_id}should be Integer"
+        return True, "Success"
 
     def clear_values(self):
         self.team_id = None
@@ -52,7 +53,8 @@ class Projects:
             return response
 
         if type(project_id) != int:
-            return f"Project ID - {project_id} Should be Integer"
+            print(f"Project ID - {project_id} Should be Integer")
+            return
 
         url = f"{BASE_GPU_URL}teams/{self.team_id}/projects/{project_id}/?apikey={config.apikey}"
         payload = ""
@@ -65,7 +67,6 @@ class Projects:
 
     @validate_access_key_and_token
     def list(self):
-
         status, response = self.validate()
 
         if not status:
@@ -89,7 +90,8 @@ class Projects:
             return response
 
         if type(project_id) != int:
-            return f"Project ID - {project_id} Should be Integer"
+            print(f"Project ID - {project_id} Should be Integer")
+            return
 
         url = f"{BASE_GPU_URL}teams/{self.team_id}/projects/{project_id}/?apikey={config.apikey}"
         payload = ""
@@ -99,3 +101,26 @@ class Projects:
         response = requests.request("DELETE", url, headers=headers, data=payload)
         print(json.dumps(response.json(), indent=INDENTATION))
         # return response.json()
+
+    @staticmethod
+    def help():
+        print("Projects Class Help")
+        print("===================")
+        print("This class provides functionalities to interact with projects.")
+        print("Available methods:")
+        print("1. __init__(team_id): Initializes a Projects instance with the specified team ID.")
+        print("2. create(project_name): Creates a new project with the provided project name.")
+        print("3. get(project_id): Retrieves information about a specific project using its ID.")
+        print("4. list(): Lists all projects associated with the team.")
+        print("5. delete(project_id): Deletes a project with the given ID.")
+        print("6. clear_values(): Resets the team ID to None.")
+        print("7. validate(): Checks if the team ID is of integer type.")
+        print("8. help(): Displays this help message.")
+
+        # Example usages
+        print("\nExample usages:")
+        print("projects = Projects(123)")
+        print("projects.create('Project Name')")
+        print("projects.get(456)")
+        print("projects.list()")
+        print("projects.delete(456)")

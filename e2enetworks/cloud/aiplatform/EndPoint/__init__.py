@@ -20,6 +20,7 @@ class EndPoints:
         if type(self.project_id) != int:
             print(f"Project Id -{self.project_id} Should be Integer")
             return False, f"Project Id -{self.project_id} should be Integer"
+        return True, "Success"
 
     def clear_values(self):
         self.team_id = None
@@ -59,7 +60,8 @@ class EndPoints:
             return response
 
         if type(endpoint_id) != int:
-            return f"EndPoint ID - {endpoint_id} Should be Integer"
+            print(f"EndPoint ID - {endpoint_id} Should be Integer")
+            return
 
         url = f"{BASE_GPU_URL}teams/{self.team_id}/projects/{self.project_id}/serving/inference/{endpoint_id}/?" \
               f"apikey={config.apikey}"
@@ -98,7 +100,8 @@ class EndPoints:
             return response
 
         if type(endpoint_id) != int:
-            return f"EndPoint ID - {endpoint_id} Should be Integer"
+            print(f"EndPoint ID - {endpoint_id} Should be Integer")
+            return
 
         url = f"{BASE_GPU_URL}teams/{self.team_id}/projects/{self.project_id}/serving/inference/{endpoint_id}/" \
               f"?apikey={config.apikey}"
@@ -119,7 +122,8 @@ class EndPoints:
             return response
 
         if type(endpoint_id) != int:
-            return f"EndPoint ID - {endpoint_id} Should be Integer"
+            print(f"EndPoint ID - {endpoint_id} Should be Integer")
+            return
 
         url = f"{BASE_GPU_URL}teams/{self.team_id}/projects/{self.project_id}/serving/inference/{endpoint_id}/logs?" \
               f"apikey={config.apikey}"
@@ -129,3 +133,28 @@ class EndPoints:
         }
         response = requests.request("GET", url, headers=headers, data=payload)
         print(json.dumps(response.json(), indent=INDENTATION))
+
+    @staticmethod
+    def help():
+        print("EndPoint Class Help")
+        print("=================")
+        print("This class provides functionalities to interact with EndPoint.")
+        print("Available methods:")
+        print(
+            "1. __init__(team_id, project_id): Initializes an EndPoints instance with the specified team and "
+            "project IDs.")
+        print("2. create(name, sku_id, prefix, replica, model_id): Creates an endpoint with the provided details.")
+        print("3. get(endpoint_id): Retrieves information about a specific endpoint using its ID.")
+        print("4. list(): Lists all endpoints associated with the team and project.")
+        print("5. delete(endpoint_id): Deletes an endpoint with the given ID.")
+        print("6. clear_values(): Resets the team and project IDs to None.")
+        print("7. validate(): Checks if the team and project IDs are of integer type.")
+        print("8. help(): Displays this help message.")
+
+        # Example usages
+        print("\nExample usages:")
+        print("endpoints = EndPoints(123, 456)")
+        print("endpoints.create('Name', sku_id, 'Prefix', replica, model_id)")
+        print("endpoints.get(789)")
+        print("endpoints.list()")
+        print("endpoints.delete(789)")
