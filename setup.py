@@ -47,10 +47,4 @@ setup(
     packages=find_packages(),
     include_package_data=True,
     install_requires=install_requires,
-    # entry_points={
-    #     "certbot.plugins": [
-    #         "dns-e2econfig = certbot_dns_e2econfig.dns_e2econfig:Authenticator"
-    #     ]
-    # },
-    #test_suite="certbot_dns_e2econfig",
 )

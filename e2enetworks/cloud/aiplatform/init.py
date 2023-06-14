@@ -23,4 +23,9 @@ class init:
         if response.status_code == STATUS_CODE:
             print(VALIDATED_SUCCESSFULLY)
         else:
+            self.clear_values()
             print(json.dumps(response.json(), indent=INDENTATION))
+
+    def clear_values(self):
+        config.apikey = None
+        config.auth_token = None
