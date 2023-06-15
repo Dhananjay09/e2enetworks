@@ -3,8 +3,8 @@ import json
 import requests
 
 from e2enetworks.cloud.aiplatform import config
-from e2enetworks.constants import (BASE_GPU_URL, INDENTATION, STATUS_CODE,
-                                   VALIDATED_SUCCESSFULLY)
+from e2enetworks.cloud.aiplatform.constants import (BASE_GPU_URL, INDENTATION, STATUS_CODE,
+                                                    VALIDATED_SUCCESSFULLY)
 
 
 class init:
@@ -24,7 +24,6 @@ class init:
             print(VALIDATED_SUCCESSFULLY)
         else:
             self.clear_values()
-            print(json.dumps(response.json(), indent=INDENTATION))
 
     def clear_values(self):
         config.apikey = None
@@ -33,16 +32,15 @@ class init:
     @staticmethod
     def help():
         print("Init Class Help")
-        print("=================")
-        print("This class provides functionalities for initialization.")
-        print("Available methods:")
-        print(
-            "1. __init__(auth_token, apikey): Initializes an Init instance with the provided authentication token and "
-            "API key.")
-        print("2. validate(auth_token, apikey): Validates the provided authentication token and API key.")
-        print("3. clear_values(): Resets the API key and authentication token to None.")
-        print("4. help(): Displays this help message.")
+        print("\t\t=================")
+        print("\t\tThis class provides functionalities for initialization.")
+        print("\t\tAvailable methods:")
+        print("\t\t1. __init__(auth_token, apikey): Initializes an Init instance with the provided authentication"
+              " token and API key.")
+        print("\t\t2. validate(auth_token, apikey): Validates the provided authentication token and API key.")
+        print("\t\t3. clear_values(): Resets the API key and authentication token to None.")
+        print("\t\t4. help(): Displays this help message.")
 
         # Example usage
-        print("\nExample usage:")
-        print("init = init('Auth Token', 'API Key')")
+        print("\t\t\nExample usage:")
+        print("\t\tinit = init('Auth Token', 'API Key')")

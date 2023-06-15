@@ -3,8 +3,9 @@ import json
 import requests
 
 from e2enetworks.cloud.aiplatform import config
-from e2enetworks.constants import BASE_GPU_URL, INDENTATION
+from e2enetworks.cloud.aiplatform.constants import BASE_GPU_URL, INDENTATION
 from e2enetworks.cloud.aiplatform.decorators.validate_access_key_and_token import validate_access_key_and_token
+from e2enetworks.cloud.aiplatform.constants import headers
 
 
 class Datasets:
@@ -41,14 +42,13 @@ class Datasets:
             return response
 
         url = f"{BASE_GPU_URL}teams/{self.team_id}/projects/{self.project_id}/datasets/?apikey={config.apikey}"
+
+        headers['Authorization'] = f'Bearer {config.auth_token}'
         payload = ""
-        headers = {
-            'Authorization': f'Bearer {config.auth_token}'
-        }
+
         response = requests.request("GET", url, headers=headers, data=payload)
 
-        print(json.dumps(response.json(), indent=INDENTATION))
-        # return response.json()
+        return response
 
     def delete(self, bucket_name):
         pass
@@ -56,25 +56,25 @@ class Datasets:
     @staticmethod
     def help():
         print("Datasets Class Help")
-        print("=================")
-        print("This class provides functionalities to interact with Datasets.")
-        print("Available methods:")
+        print("\t\t=================")
+        print("\t\tThis class provides functionalities to interact with Datasets.")
+        print("\t\tAvailable methods:")
         print(
-            "1. __init__(team_id, project_id): Initializes a Datasets instance with the specified team and "
+            "\t\t1. __init__(team_id, project_id): Initializes a Datasets instance with the specified team and "
             "project IDs.")
-        print("2. create(bucket_name, bucket_type=None): Creates a new dataset with the provided bucket name and "
+        print("\t\t2. create(bucket_name, bucket_type=None): Creates a new dataset with the provided bucket name and "
               "optional bucket type.")
-        print("3. get(bucket_name): Retrieves information about a specific dataset using its bucket name.")
-        print("4. list(): Lists all datasets associated with the team and project.")
-        print("5. delete(bucket_name): Deletes a dataset with the given bucket name.")
-        print("6. clear_values(): Resets the team and project IDs to None.")
-        print("7. validate(): Checks if the team and project IDs are of integer type.")
-        print("8. help(): Displays this help message.")
+        print("\t\t3. get(bucket_name): Retrieves information about a specific dataset using its bucket name.")
+        print("\t\t4. list(): Lists all datasets associated with the team and project.")
+        print("\t\t5. delete(bucket_name): Deletes a dataset with the given bucket name.")
+        print("\t\t6. clear_values(): Resets the team and project IDs to None.")
+        print("\t\t7. validate(): Checks if the team and project IDs are of integer type.")
+        print("\t\t8. help(): Displays this help message.")
 
         # Example usages
-        print("\nExample usages:")
-        print("datasets = Datasets(123, 456)")
-        print("datasets.create('Bucket Name', 'Bucket Type')")
-        print("datasets.get('Bucket Name')")
-        print("datasets.list()")
-        print("datasets.delete('Bucket Name')")
+        print("\t\tExample usages:")
+        print("\t\tdatasets = Datasets(123, 456)")
+        print("\t\tdatasets.create('Bucket Name', 'Bucket Type')")
+        print("\t\tdatasets.get('Bucket Name')")
+        print("\t\tdatasets.list()")
+        print("\t\tdatasets.delete('Bucket Name')")

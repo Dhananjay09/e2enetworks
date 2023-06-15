@@ -3,8 +3,9 @@ import json
 import requests
 
 from e2enetworks.cloud.aiplatform import config
-from e2enetworks.constants import BASE_GPU_URL, INDENTATION
+from e2enetworks.cloud.aiplatform.constants import BASE_GPU_URL, INDENTATION
 from e2enetworks.cloud.aiplatform.decorators.validate_access_key_and_token import validate_access_key_and_token
+from e2enetworks.cloud.aiplatform.constants import headers
 
 
 class APITokens:
@@ -37,15 +38,14 @@ class APITokens:
         payload = json.dumps({
             "auth_token": auth_token,
         })
+
+        headers['Authorization'] = f'Bearer {config.auth_token}'
+
         url = f"{BASE_GPU_URL}teams/{self.team_id}/auth-token/?apikey={config.apikey}&project_id={self.project_id}"
 
-        headers = {
-            'Content-Type': 'application/json',
-            'Authorization': f'Bearer {config.auth_token}'
-        }
         response = requests.request("POST", url, headers=headers, data=payload)
 
-        print(json.dumps(response.json(), indent=INDENTATION))
+        
 
     @validate_access_key_and_token
     def list(self):
@@ -56,12 +56,12 @@ class APITokens:
             return response
 
         url = f"{BASE_GPU_URL}teams/{self.team_id}/auth-token/?apikey={config.apikey}&project_id={self.project_id}"
+
         payload = ""
-        headers = {
-            'Authorization': f'Bearer {config.auth_token}'
-        }
+        headers['Authorization'] = f'Bearer {config.auth_token}'
+
         response = requests.request("GET", url, headers=headers, data=payload)
-        print(json.dumps(response.json(), indent=INDENTATION))
+        
 
     @validate_access_key_and_token
     def delete(self, token_id):
@@ -77,32 +77,32 @@ class APITokens:
 
         url = f"{BASE_GPU_URL}teams/{self.team_id}/auth-token/{token_id}/?apikey={config.apikey}&project_id=" \
               f"{self.project_id}"
+
         payload = ""
-        headers = {
-            'Authorization': f'Bearer {config.auth_token}'
-        }
+        headers['Authorization'] = f'Bearer {config.auth_token}'
+
         response = requests.request("DELETE", url, headers=headers, data=payload)
-        print(json.dumps(response.json(), indent=INDENTATION))
+        return response
 
     @staticmethod
     def help():
         print("APITokens Class Help")
-        print("====================")
-        print("This class provides functionalities to manage API tokens.")
-        print("Available methods:")
+        print("\t\t====================")
+        print("\t\tThis class provides functionalities to manage API tokens.")
+        print("\t\tAvailable methods:")
         print(
-            "1. __init__(team_id, project_id): Initializes an APITokens instance with the specified team ID and "
+            "\t\t1. __init__(team_id, project_id): Initializes an APITokens instance with the specified team ID and "
             "project ID.")
-        print("2. create(auth_token): Creates a new API token with the provided authentication token.")
-        print("3. list(): Lists all API tokens associated with the team and project.")
-        print("4. delete(token_id): Deletes an API token with the given token ID.")
-        print("5. clear_values(): Resets the team ID and project ID to None.")
-        print("6. validate(): Checks if the team ID and project ID are of integer type.")
-        print("7. help(): Displays this help message.")
+        print("\t\t2. create(auth_token): Creates a new API token with the provided authentication token.")
+        print("\t\t3. list(): Lists all API tokens associated with the team and project.")
+        print("\t\t4. delete(token_id): Deletes an API token with the given token ID.")
+        print("\t\t5. clear_values(): Resets the team ID and project ID to None.")
+        print("\t\t6. validate(): Checks if the team ID and project ID are of integer type.")
+        print("\t\t7. help(): Displays this help message.")
 
         # Example usages
-        print("\nExample usages:")
-        print("api_tokens = APITokens(123, 456)")
-        print("api_tokens.create('auth_token')")
-        print("api_tokens.list()")
-        print("api_tokens.delete(789)")
+        print("\t\tExample usages:")
+        print("\t\tapi_tokens = APITokens(123, 456)")
+        print("\t\tapi_tokens.create('auth_token')")
+        print("\t\tapi_tokens.list()")
+        print("\t\tapi_tokens.delete(789)")

@@ -3,8 +3,9 @@ import json
 import requests
 
 from e2enetworks.cloud.aiplatform import config
-from e2enetworks.constants import BASE_GPU_URL, INDENTATION
+from e2enetworks.cloud.aiplatform.constants import BASE_GPU_URL, INDENTATION
 from e2enetworks.cloud.aiplatform.decorators.validate_access_key_and_token import validate_access_key_and_token
+from e2enetworks.cloud.aiplatform.constants import headers
 
 
 class Notebooks:
@@ -39,15 +40,13 @@ class Notebooks:
             "sku_id": sku_id,
             "instance_type": instance_type
         })
+        headers['Authorization'] = f'Bearer {config.auth_token}'
         url = f"{BASE_GPU_URL}teams/{self.team_id}/projects/{self.project_id}/notebooks/" \
               f"?apikey={config.apikey}"
-        headers = {
-            'Content-Type': 'application/json',
-            'Authorization': f'Bearer {config.auth_token}'
-        }
+
         response = requests.request("POST", url, headers=headers, data=payload)
 
-        print(json.dumps(response.json(), indent=INDENTATION))
+        
 
     @validate_access_key_and_token
     def get(self, notebook_id):
@@ -63,13 +62,13 @@ class Notebooks:
 
         url = f"{BASE_GPU_URL}teams/{self.team_id}/projects/{self.project_id}/notebooks/{notebook_id}/?" \
               f"apikey={config.apikey}"
+
         payload = ""
-        headers = {
-            'Authorization': f'Bearer {config.auth_token}'
-        }
+        headers['Authorization'] = f'Bearer {config.auth_token}'
+
         response = requests.request("GET", url, headers=headers, data=payload)
-        print(json.dumps(response.json(), indent=INDENTATION))
-        # return response.json()
+        
+        return response
 
     @validate_access_key_and_token
     def list(self):
@@ -82,12 +81,9 @@ class Notebooks:
         url = f"{BASE_GPU_URL}teams/{self.team_id}/projects/{self.project_id}/notebooks/" \
               f"?apikey={config.apikey}"
         payload = ""
-        headers = {
-            'Authorization': f'Bearer {config.auth_token}'
-        }
         response = requests.request("GET", url, headers=headers, data=payload)
-        print(json.dumps(response.json(), indent=INDENTATION))
-        # return response.json()
+        
+        return response
 
     @validate_access_key_and_token
     def delete(self, notebook_id):
@@ -103,13 +99,13 @@ class Notebooks:
 
         url = f"{BASE_GPU_URL}teams/{self.team_id}/projects/{self.project_id}/notebooks/{notebook_id}/?" \
               f"apikey={config.apikey}"
+
         payload = ""
-        headers = {
-            'Authorization': f'Bearer {config.auth_token}'
-        }
+        headers['Authorization'] = f'Bearer {config.auth_token}'
+
         response = requests.request("DELETE", url, headers=headers, data=payload)
-        print(json.dumps(response.json(), indent=INDENTATION))
-        # return response.json()
+        
+        return response
 
     @validate_access_key_and_token
     def stop(self, notebook_id):
@@ -125,13 +121,13 @@ class Notebooks:
 
         url = f"{BASE_GPU_URL}teams/{self.team_id}/projects/{self.project_id}/notebooks/{notebook_id}/actions/" \
               f"?action=stop&apikey={config.apikey}"
+
         payload = ""
-        headers = {
-            'Authorization': f'Bearer {config.auth_token}'
-        }
+        headers['Authorization'] = f'Bearer {config.auth_token}'
+
         response = requests.request("PUT", url, headers=headers, data=payload)
-        print(json.dumps(response.json(), indent=INDENTATION))
-        # return response.json()
+        
+        return response
 
     @validate_access_key_and_token
     def start(self, notebook_id):
@@ -147,13 +143,13 @@ class Notebooks:
 
         url = f"{BASE_GPU_URL}teams/{self.team_id}/projects/{self.project_id}/notebooks/{notebook_id}/actions/" \
               f"?action=start&apikey={config.apikey}"
+
         payload = ""
-        headers = {
-            'Authorization': f'Bearer {config.auth_token}'
-        }
+        headers['Authorization'] = f'Bearer {config.auth_token}'
+
         response = requests.request("PUT", url, headers=headers, data=payload)
-        print(json.dumps(response.json(), indent=INDENTATION))
-        # return response.json()
+        
+        return response
 
     def upgrade(self, notebook_id, size):
         status, response = self.validate()
@@ -171,22 +167,15 @@ class Notebooks:
 
         url = f"{BASE_GPU_URL}teams/{self.team_id}/projects/{self.project_id}/notebooks/{notebook_id}/pvc/" \
               f"upgrade/?apikey={config.apikey}"
+
         payload = json.dumps({
             "size": size
         })
-        headers = {
-            'Authorization': f'Bearer {config.auth_token}',
-            'Connection': 'keep-alive',
-            'Content-Type': 'application/json',
-            'Origin': 'https://gpu-notebooks.e2enetworks.com',
-            'Referer': 'https://gpu-notebooks.e2enetworks.com/',
-            'Sec-Fetch-Dest': 'empty',
-            'Sec-Fetch-Mode': 'cors',
-            'Sec-Fetch-Site': 'same-site',
-        }
+        headers['Authorization'] = f'Bearer {config.auth_token}'
+
         response = requests.request("PUT", url, headers=headers, data=payload)
-        print(json.dumps(response.json(), indent=INDENTATION))
-        # return response.json()
+        
+        return response
 
     @staticmethod
     def help():

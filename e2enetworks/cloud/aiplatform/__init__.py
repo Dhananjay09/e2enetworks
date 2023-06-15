@@ -1,3 +1,4 @@
+import json
 from e2enetworks.cloud.aiplatform.Notebooks import Notebooks
 from e2enetworks.cloud.aiplatform.Dataset import Datasets
 from e2enetworks.cloud.aiplatform.EndPoint import EndPoints
@@ -9,18 +10,21 @@ from e2enetworks.cloud.aiplatform.APIToken import APITokens
 
 
 def help():
-    print("AIPlatform Help")
-    print("=================")
-    print("Available classes:")
-    print("- Datasets: Provides functionalities to interact with datasets.")
-    print("- EndPoints: Provides functionalities to interact with endpoints.")
-    print("- Init: Provides functionalities for initialization.")
-    print("- Models: Provides functionalities to interact with models.")
-    print("- Projects: Provides functionalities to interact with projects.")
-    print("- Teams: Provides functionalities to interact with teams.")
-    print("- APITokens: Provides functionalities to interact with API tokens.")
+    print("\t\tAIPlatform Help")
+    print("\t\t=================")
+    print("\t\tAvailable classes:")
+    print("\t\t- Notebooks: Provides functionalities to interact with notebooks.")
+    print("\t\t- Datasets: Provides functionalities to interact with datasets.")
+    print("\t\t- EndPoints: Provides functionalities to interact with endpoints.")
+    print("\t\t- Init: Provides functionalities for initialization.")
+    print("\t\t- Models: Provides functionalities to interact with models.")
+    print("\t\t- Projects: Provides functionalities to interact with projects.")
+    print("\t\t- Teams: Provides functionalities to interact with teams.")
+    print("\t\t- APITokens: Provides functionalities to interact with API tokens.")
+    print("\t\t- beautify: beautify and print the specific response")
 
     # Call help() method on each class
+    Notebooks(team_id=1, project_id=2).help()
     Datasets(team_id=1, project_id=2).help()
     EndPoints(team_id=1, project_id=2).help()
     init(auth_token="", apikey="").help()
@@ -28,3 +32,7 @@ def help():
     Projects(team_id=1).help()
     Teams().help()
     APITokens(team_id=1, project_id=2).help()
+
+
+def beautify(response):
+    print(json.dumps(response.json(), indent=5))

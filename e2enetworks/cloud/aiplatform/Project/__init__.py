@@ -3,8 +3,9 @@ import json
 import requests
 
 from e2enetworks.cloud.aiplatform import config
-from e2enetworks.constants import BASE_GPU_URL, INDENTATION
+from e2enetworks.cloud.aiplatform.constants import BASE_GPU_URL, INDENTATION
 from e2enetworks.cloud.aiplatform.decorators.validate_access_key_and_token import validate_access_key_and_token
+from e2enetworks.cloud.aiplatform.constants import headers
 
 
 class Projects:
@@ -34,15 +35,12 @@ class Projects:
         })
 
         url = f"{BASE_GPU_URL}teams/{self.team_id}/projects/?apikey={config.apikey}"
+        headers['Authorization'] = f'Bearer {config.auth_token}'
 
-        headers = {
-            'Content-Type': 'application/json',
-            'Authorization': f'Bearer {config.auth_token}'
-        }
         response = requests.request("POST", url, headers=headers, data=payload)
 
-        print(json.dumps(response.json(), indent=INDENTATION))
-        # return response.json()
+        
+        return response
 
     @validate_access_key_and_token
     def get(self, project_id):
@@ -58,12 +56,11 @@ class Projects:
 
         url = f"{BASE_GPU_URL}teams/{self.team_id}/projects/{project_id}/?apikey={config.apikey}"
         payload = ""
-        headers = {
-            'Authorization': f'Bearer {config.auth_token}'
-        }
+        headers['Authorization'] = f'Bearer {config.auth_token}'
+
         response = requests.request("GET", url, headers=headers, data=payload)
-        print(json.dumps(response.json(), indent=INDENTATION))
-        # return response.json()
+        
+        return response
 
     @validate_access_key_and_token
     def list(self):
@@ -74,12 +71,11 @@ class Projects:
 
         url = f"{BASE_GPU_URL}teams/{self.team_id}/projects/?apikey={config.apikey}"
         payload = ""
-        headers = {
-            'Authorization': f'Bearer {config.auth_token}'
-        }
+        headers['Authorization'] = f'Bearer {config.auth_token}'
+
         response = requests.request("GET", url, headers=headers, data=payload)
-        print(json.dumps(response.json(), indent=INDENTATION))
-        # return response.json()
+        
+        return response
 
     @validate_access_key_and_token
     def delete(self, project_id):
@@ -95,32 +91,31 @@ class Projects:
 
         url = f"{BASE_GPU_URL}teams/{self.team_id}/projects/{project_id}/?apikey={config.apikey}"
         payload = ""
-        headers = {
-            'Authorization': f'Bearer {config.auth_token}'
-        }
+        headers['Authorization'] = f'Bearer {config.auth_token}'
+
         response = requests.request("DELETE", url, headers=headers, data=payload)
-        print(json.dumps(response.json(), indent=INDENTATION))
-        # return response.json()
+        
+        return response
 
     @staticmethod
     def help():
         print("Projects Class Help")
-        print("===================")
-        print("This class provides functionalities to interact with projects.")
-        print("Available methods:")
-        print("1. __init__(team_id): Initializes a Projects instance with the specified team ID.")
-        print("2. create(project_name): Creates a new project with the provided project name.")
-        print("3. get(project_id): Retrieves information about a specific project using its ID.")
-        print("4. list(): Lists all projects associated with the team.")
-        print("5. delete(project_id): Deletes a project with the given ID.")
-        print("6. clear_values(): Resets the team ID to None.")
-        print("7. validate(): Checks if the team ID is of integer type.")
-        print("8. help(): Displays this help message.")
+        print("\t\t===================")
+        print("\t\tThis class provides functionalities to interact with projects.")
+        print("\t\tAvailable methods:")
+        print("\t\t1. __init__(team_id): Initializes a Projects instance with the specified team ID.")
+        print("\t\t2. create(project_name): Creates a new project with the provided project name.")
+        print("\t\t3. get(project_id): Retrieves information about a specific project using its ID.")
+        print("\t\t4. list(): Lists all projects associated with the team.")
+        print("\t\t5. delete(project_id): Deletes a project with the given ID.")
+        print("\t\t6. clear_values(): Resets the team ID to None.")
+        print("\t\t7. validate(): Checks if the team ID is of integer type.")
+        print("\t\t8. help(): Displays this help message.")
 
         # Example usages
-        print("\nExample usages:")
-        print("projects = Projects(123)")
-        print("projects.create('Project Name')")
-        print("projects.get(456)")
-        print("projects.list()")
-        print("projects.delete(456)")
+        print("\t\tExample usages:")
+        print("\t\tprojects = Projects(123)")
+        print("\t\tprojects.create('Project Name')")
+        print("\t\tprojects.get(456)")
+        print("\t\tprojects.list()")
+        print("\t\tprojects.delete(456)")
