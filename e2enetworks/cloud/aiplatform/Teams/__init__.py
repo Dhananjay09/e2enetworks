@@ -18,10 +18,7 @@ class Teams:
 
         headers['Authorization'] = f'Bearer {config.auth_token}'
 
-        response = requests.request("POST", url, headers=headers, data=payload)
-
-        
-        return response
+        return requests.request("POST", url, headers=headers, data=payload)
 
     @validate_access_key_and_token
     def get(self, team_id):
@@ -36,9 +33,7 @@ class Teams:
 
         headers['Authorization'] = f'Bearer {config.auth_token}'
 
-        response = requests.request("GET", url, headers=headers, data=payload)
-        
-        return response
+        return requests.request("GET", url, headers=headers, data=payload)
 
     @validate_access_key_and_token
     def list(self):
@@ -47,8 +42,7 @@ class Teams:
 
         headers['Authorization'] = f'Bearer {config.auth_token}'
 
-        response = requests.request("GET", url, headers=headers, data=payload)
-        return response
+        return requests.request("GET", url, headers=headers, data=payload)
 
     @validate_access_key_and_token
     def delete(self, team_id):
@@ -61,9 +55,7 @@ class Teams:
         payload = ""
 
         headers['Authorization'] = f'Bearer {config.auth_token}'
-        response = requests.request("DELETE", url, headers=headers, data=payload)
-        
-        return response
+        return requests.request("DELETE", url, headers=headers, data=payload)
 
     @staticmethod
     def help():

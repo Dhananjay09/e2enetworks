@@ -3,7 +3,7 @@ import json
 import requests
 
 from e2enetworks.cloud.aiplatform import config
-from e2enetworks.cloud.aiplatform.constants import BASE_GPU_URL, INDENTATION
+from e2enetworks.cloud.aiplatform.constants import BASE_GPU_URL, INSTANCE_TYPE
 from e2enetworks.cloud.aiplatform.decorators.validate_access_key_and_token import validate_access_key_and_token
 from e2enetworks.cloud.aiplatform.constants import headers
 
@@ -64,9 +64,7 @@ class Notebooks:
         payload = ""
         headers['Authorization'] = f'Bearer {config.auth_token}'
 
-        response = requests.request("GET", url, headers=headers, data=payload)
-        
-        return response
+        return requests.request("GET", url, headers=headers, data=payload)
 
     @validate_access_key_and_token
     def list(self):
@@ -79,9 +77,7 @@ class Notebooks:
         url = f"{BASE_GPU_URL}teams/{self.team_id}/projects/{self.project_id}/notebooks/" \
               f"?apikey={config.apikey}"
         payload = ""
-        response = requests.request("GET", url, headers=headers, data=payload)
-        
-        return response
+        return requests.request("GET", url, headers=headers, data=payload)
 
     @validate_access_key_and_token
     def delete(self, notebook_id):
@@ -101,9 +97,7 @@ class Notebooks:
         payload = ""
         headers['Authorization'] = f'Bearer {config.auth_token}'
 
-        response = requests.request("DELETE", url, headers=headers, data=payload)
-        
-        return response
+        return requests.request("DELETE", url, headers=headers, data=payload)
 
     @validate_access_key_and_token
     def stop(self, notebook_id):
@@ -123,9 +117,7 @@ class Notebooks:
         payload = ""
         headers['Authorization'] = f'Bearer {config.auth_token}'
 
-        response = requests.request("PUT", url, headers=headers, data=payload)
-        
-        return response
+        return requests.request("PUT", url, headers=headers, data=payload)
 
     @validate_access_key_and_token
     def start(self, notebook_id):
@@ -171,15 +163,13 @@ class Notebooks:
         })
         headers['Authorization'] = f'Bearer {config.auth_token}'
 
-        response = requests.request("PUT", url, headers=headers, data=payload)
-        
-        return response
+        return requests.request("PUT", url, headers=headers, data=payload)
 
     @staticmethod
     def help():
         print("\t\tNotebook Class Help")
         print("\t\t=================")
-        help_text = """
+        help_text = f"""
                 Notebooks class provides methods to interact with notebooks in a project.
 
                 Available methods:
@@ -193,7 +183,7 @@ class Notebooks:
 
                 Usage:
                 notebooks = Notebooks(team_id, project_id)
-                notebooks.create(name, sku_id, image_id, instance_type)
+                notebooks.create(name, sku_id, image_id, instance_type={INSTANCE_TYPE})
                 notebooks.get(notebook_id)
                 notebooks.list()
                 notebooks.delete(notebook_id)

@@ -3,7 +3,7 @@ import json
 import requests
 
 from e2enetworks.cloud.aiplatform import config
-from e2enetworks.cloud.aiplatform.constants import BASE_GPU_URL, INDENTATION
+from e2enetworks.cloud.aiplatform.constants import BASE_GPU_URL, BUCKET_TYPES, MODEL_TYPES
 from e2enetworks.cloud.aiplatform.decorators.validate_access_key_and_token import validate_access_key_and_token
 from e2enetworks.cloud.aiplatform.constants import headers
 
@@ -46,10 +46,7 @@ class Models:
               f"?apikey={config.apikey}"
         headers['Authorization'] = f'Bearer {config.auth_token}'
 
-        response = requests.request("POST", url, headers=headers, data=payload)
-
-        
-        return response
+        return requests.request("POST", url, headers=headers, data=payload)
 
     @validate_access_key_and_token
     def get(self, model_id):
@@ -69,9 +66,7 @@ class Models:
         payload = ""
         headers['Authorization'] = f'Bearer {config.auth_token}'
 
-        response = requests.request("GET", url, headers=headers, data=payload)
-        
-        return response
+        return requests.request("GET", url, headers=headers, data=payload)
 
     @validate_access_key_and_token
     def list(self):
@@ -107,9 +102,7 @@ class Models:
         payload = ""
         headers['Authorization'] = f'Bearer {config.auth_token}'
 
-        response = requests.request("DELETE", url, headers=headers, data=payload)
-        
-        return response
+        return requests.request("DELETE", url, headers=headers, data=payload)
 
     @staticmethod
     def help():
@@ -132,7 +125,8 @@ class Models:
         # Example usages
         print("\t\tExample usages:")
         print("\t\tmodels = Models(123, 456)")
-        print("\t\tmodels.create('Model Name', 'Bucket Type', 'Bucket Name', 'Model Type')")
+        print(f"\t\tmodels.create(name='Test Dataset', bucket_name='dataset-bucket', bucket_type={BUCKET_TYPES},"
+              f" model_type={MODEL_TYPES})")
         print("\t\tmodels.get(789)")
         print("\t\tmodels.list()")
         print("\t\tmodels.delete(789)")

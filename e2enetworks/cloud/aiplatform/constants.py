@@ -23,3 +23,7 @@ BUCKET_TYPES_HELP = {
     E2E_OBJECT_STORAGE: " To Use Existing Bucket"
 }
 
+FREE_USAGE = "free_usage"
+PAID_USAGE = "paid_usage"
+INSTANCE_TYPE = [FREE_USAGE, PAID_USAGE]
+MODEL_TYPES = ['pytorch', 'triton']

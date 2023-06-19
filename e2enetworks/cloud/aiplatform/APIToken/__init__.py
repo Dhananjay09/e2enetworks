@@ -28,7 +28,7 @@ class APITokens:
         self.project_id = None
 
     @validate_access_key_and_token
-    def create(self, auth_token):
+    def create(self, token_name):
 
         status, response = self.validate()
 
@@ -36,16 +36,14 @@ class APITokens:
             return response
 
         payload = json.dumps({
-            "auth_token": auth_token,
+            "token_name": token_name,
         })
 
         headers['Authorization'] = f'Bearer {config.auth_token}'
 
         url = f"{BASE_GPU_URL}teams/{self.team_id}/auth-token/?apikey={config.apikey}&project_id={self.project_id}"
 
-        response = requests.request("POST", url, headers=headers, data=payload)
-
-        
+        return requests.request("POST", url, headers=headers, data=payload)
 
     @validate_access_key_and_token
     def list(self):
@@ -60,8 +58,7 @@ class APITokens:
         payload = ""
         headers['Authorization'] = f'Bearer {config.auth_token}'
 
-        response = requests.request("GET", url, headers=headers, data=payload)
-        
+        return requests.request("GET", url, headers=headers, data=payload)
 
     @validate_access_key_and_token
     def delete(self, token_id):
@@ -93,7 +90,7 @@ class APITokens:
         print(
             "\t\t1. __init__(team_id, project_id): Initializes an APITokens instance with the specified team ID and "
             "project ID.")
-        print("\t\t2. create(auth_token): Creates a new API token with the provided authentication token.")
+        print("\t\t2. create(token_name): Creates a new API token with the provided authentication token.")
         print("\t\t3. list(): Lists all API tokens associated with the team and project.")
         print("\t\t4. delete(token_id): Deletes an API token with the given token ID.")
         print("\t\t5. clear_values(): Resets the team ID and project ID to None.")
@@ -103,6 +100,6 @@ class APITokens:
         # Example usages
         print("\t\tExample usages:")
         print("\t\tapi_tokens = APITokens(123, 456)")
-        print("\t\tapi_tokens.create('auth_token')")
+        print("\t\tapi_tokens.create('token_name')")
         print("\t\tapi_tokens.list()")
         print("\t\tapi_tokens.delete(789)")

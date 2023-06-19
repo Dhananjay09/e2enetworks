@@ -47,9 +47,7 @@ class EndPoints:
               f"?apikey={config.apikey}"
         headers['Authorization'] = f'Bearer {config.auth_token}'
 
-        response = requests.request("POST", url, headers=headers, data=payload)
-
-        
+        return requests.request("POST", url, headers=headers, data=payload)
 
     @validate_access_key_and_token
     def get(self, endpoint_id):
@@ -111,6 +109,28 @@ class EndPoints:
 
         response = requests.request("DELETE", url, headers=headers, data=payload)
         
+        return response
+
+    @validate_access_key_and_token
+    def logs(self, endpoint_id):
+
+        status, response = self.validate()
+
+        if not status:
+            return response
+
+        if type(endpoint_id) != int:
+            print(f"EndPoint ID - {endpoint_id} Should be Integer")
+            return
+
+        url = f"{BASE_GPU_URL}teams/{self.team_id}/projects/{self.project_id}/serving/inference/{endpoint_id}/logs/?" \
+              f"apikey={config.apikey}"
+
+        payload = ""
+        headers['Authorization'] = f'Bearer {config.auth_token}'
+
+        response = requests.request("GET", url, headers=headers, data=payload)
+
         return response
 
     @staticmethod

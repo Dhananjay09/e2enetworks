@@ -41,4 +41,7 @@ def help():
 
 
 def beautify(response):
-    print(json.dumps(response.json(), indent=5))
+    try:
+        print(json.dumps(response.json(), indent=5))
+    except Exception as e:
+        print(e)

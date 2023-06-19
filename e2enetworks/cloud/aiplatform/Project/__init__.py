@@ -37,9 +37,7 @@ class Projects:
         url = f"{BASE_GPU_URL}teams/{self.team_id}/projects/?apikey={config.apikey}"
         headers['Authorization'] = f'Bearer {config.auth_token}'
 
-        response = requests.request("POST", url, headers=headers, data=payload)
-
-        return response
+        return requests.request("POST", url, headers=headers, data=payload)
 
     @validate_access_key_and_token
     def get(self, project_id):
@@ -57,9 +55,7 @@ class Projects:
         payload = ""
         headers['Authorization'] = f'Bearer {config.auth_token}'
 
-        response = requests.request("GET", url, headers=headers, data=payload)
-        
-        return response
+        return requests.request("GET", url, headers=headers, data=payload)
 
     @validate_access_key_and_token
     def list(self):
@@ -72,9 +68,7 @@ class Projects:
         payload = ""
         headers['Authorization'] = f'Bearer {config.auth_token}'
 
-        response = requests.request("GET", url, headers=headers, data=payload)
-        
-        return response
+        return requests.request("GET", url, headers=headers, data=payload)
 
     @validate_access_key_and_token
     def delete(self, project_id):
@@ -92,9 +86,7 @@ class Projects:
         payload = ""
         headers['Authorization'] = f'Bearer {config.auth_token}'
 
-        response = requests.request("DELETE", url, headers=headers, data=payload)
-        
-        return response
+        return requests.request("DELETE", url, headers=headers, data=payload)
 
     @staticmethod
     def help():
