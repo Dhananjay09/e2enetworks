@@ -3,8 +3,8 @@ import json
 import requests
 
 from e2enetworks.cloud.aiplatform import config
-from e2enetworks.cloud.aiplatform.constants import (BASE_GPU_URL, INDENTATION, STATUS_CODE,
-                                                    VALIDATED_SUCCESSFULLY)
+from e2enetworks.cloud.aiplatform.constants import (BASE_GPU_URL, STATUS_CODE,
+                                                    VALIDATED_SUCCESSFULLY, INVALID_CREDENTIALS)
 
 
 class init:
@@ -23,6 +23,7 @@ class init:
         if response.status_code == STATUS_CODE:
             print(VALIDATED_SUCCESSFULLY)
         else:
+            print(INVALID_CREDENTIALS)
             self.clear_values()
 
     def clear_values(self):

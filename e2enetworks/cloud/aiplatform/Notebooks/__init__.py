@@ -44,9 +44,7 @@ class Notebooks:
         url = f"{BASE_GPU_URL}teams/{self.team_id}/projects/{self.project_id}/notebooks/" \
               f"?apikey={config.apikey}"
 
-        response = requests.request("POST", url, headers=headers, data=payload)
-
-        
+        return requests.request("POST", url, headers=headers, data=payload)
 
     @validate_access_key_and_token
     def get(self, notebook_id):
@@ -179,6 +177,8 @@ class Notebooks:
 
     @staticmethod
     def help():
+        print("\t\tNotebook Class Help")
+        print("\t\t=================")
         help_text = """
                 Notebooks class provides methods to interact with notebooks in a project.
 

@@ -39,7 +39,6 @@ class Projects:
 
         response = requests.request("POST", url, headers=headers, data=payload)
 
-        
         return response
 
     @validate_access_key_and_token
