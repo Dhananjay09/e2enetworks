@@ -1,16 +1,15 @@
-# This is a sample Python script.
+from e2enetworks.cloud import tir
+from e2enetworks.cloud.tir import PipelineClient
 
-# Press ⌃R to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
-
+def test_init():
+    print(f'Start test') 
+    token="eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJGSjg2R2NGM2pUYk5MT2NvNE52WmtVQ0lVbWZZQ3FvcXRPUWVNZmJoTmxFIn0.eyJleHAiOjE3MTQxMzc4OTAsImlhdCI6MTY4MjYwMTg5MCwianRpIjoiMjNiZGY4ODEtOWVlMy00NDBkLWE3ZjQtYmM3MmNjOWE3NGJmIiwiaXNzIjoiaHR0cDovL2dhdGV3YXkuZTJlbmV0d29ya3MuY29tL2F1dGgvcmVhbG1zL2FwaW1hbiIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiI2YTcwNDgzNC1hZmI0LTRlNTYtODM0Yi02NDc5ZDgzM2U0NzEiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJhcGltYW51aSIsInNlc3Npb25fc3RhdGUiOiI1MjhhYWVjNi0xM2U4LTRkM2QtOGYzYS03MTY4NjU2MjRmYTEiLCJhY3IiOiIxIiwiYWxsb3dlZC1vcmlnaW5zIjpbIiJdLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsib2ZmbGluZV9hY2Nlc3MiLCJ1bWFfYXV0aG9yaXphdGlvbiIsImFwaXVzZXIiLCJkZWZhdWx0LXJvbGVzLWFwaW1hbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoicHJvZmlsZSBlbWFpbCIsInNpZCI6IjUyOGFhZWM2LTEzZTgtNGQzZC04ZjNhLTcxNjg2NTYyNGZhMSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwibmFtZSI6IkFtb2wgVW1iYXJrYXIiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJhbW9sLnVtYmFya2FyQGUyZW5ldHdvcmtzLmNvbSIsImdpdmVuX25hbWUiOiJBbW9sIiwiZmFtaWx5X25hbWUiOiJVbWJhcmthciIsImVtYWlsIjoiYW1vbC51bWJhcmthckBlMmVuZXR3b3Jrcy5jb20ifQ.icaQfohorfVr5TsxyNjEj0zG58uWIEvfbZbh9bLare3AF2oHYyTlXkH8phw-s9ZO3q1We1nqevPQkHbH-CUSxcJJafI9SvtavIU7ivOtQAGzBuzot3MZsHYj7Q9mSsDsmJlsuFVy7koJGx0meev0m03gnVvt3XWML_rtW6iRrIE"
+    tir.init(api_key="test", access_token=token, project="578")
+    
+    p = PipelineClient()
+    print(p.list_pipelines())
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    print_hi('PyCharm')
+    test_init()
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
